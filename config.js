@@ -29,4 +29,3 @@ const RenJSConfig =  {
 }
 
 const RenJSGame = new RenJS.game(RenJSConfig)
-RenJSGame.launch()

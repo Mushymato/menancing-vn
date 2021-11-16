@@ -1,0 +1,19 @@
+start:
+  - show room: WITH FADE CONTINUE
+  - show deuzi: happy AT CENTER WITH FADE
+  - deuzi says: Hello, welcome to (bold)Evidence Minigame!(end)
+  - call EvidenceCollection:
+    clueset: phones
+  - deuzi says: Will you pick up the device?
+  - choice:
+    - 'Yes!':
+      - deuzi says happy: It's a pink PDA.
+    - 'No.':
+      - deuzi says: Ok.
+      - scene: endGame
+  - scene: start
+
+endGame:
+  - deuzi says normal: Evidence Test over!
+  - hide ALL:
+

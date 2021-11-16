@@ -13,10 +13,6 @@ characters:
       happy: assets/characters/Char3HappySchool.png
       angry: assets/characters/Char3AngrySchool.png
 
-cgs:
-  phone1: assets/objects/phone1.png
-  phone2: assets/objects/phone2.png
-
 music:
   rollingCredits: assets/audio/Evan_Schaeffer_-_01_-_Aqueduct.mp3
   morningBGM: assets/audio/Evan_Schaeffer_-_03_-_Glow.mp3
@@ -30,3 +26,37 @@ extra:
     sakura: assets/ambient/sakura-petals.png 17 26
     snowflakes: assets/ambient/snowflakes.png 17 17
     snowflakes_large: assets/ambient/snowflakes_large.png 64 64
+
+# evidence game stuff
+EvidenceCollection:
+  phones:
+    title: 少年少女
+    clues:
+      PinkPhone:
+        text: Pink Phone
+        icon: assets/objects/phone1.png
+        x: 100
+        y: 100
+      BluePhone:
+        text: Blue Phone
+        icon: assets/objects/phone2.png
+        x: 100
+        y: 200
+      ForbiddenLove:
+        text: Romeo and Juliet
+        icon: assets/objects/forbiddenlove.png
+        x: 100
+        y: 300
+      Ukimasu:
+        text: 今から…浮きます
+        icon: assets/objects/ukimasu.png
+        x: 200
+        y: 200
+    connections:
+      GirlMeetsBoy:
+        text: Girl Meets Boy
+        link:
+          - PinkPhone
+          - BluePhone
+        imply:
+          - ForbiddenLove
