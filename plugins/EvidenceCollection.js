@@ -30,14 +30,14 @@ class EvidenceCollection extends RenJS.Plugin {
                     this.state.clueRooms[room] = {added: {}, removed: {}};
                 }
                 for (const obj in this.clueRooms[room].objects){
-                    // Objects in initial configuration
-                    if(this.state.clueRooms[room].removed[obj]){
-                        // object was removed, don't add it
+                    if (this.state.clueRooms[room].removed[obj]){
                         continue;
                     }
-
                     const objAttr = this.clueRooms[room].objects[obj];
-                    let newObj = {
+                    if (objAttr.extra){
+                        continue;
+                    }
+                    const newObj = {
                         key: obj,
                         text: objAttr.text,
                         icon: objAttr.icon,
@@ -104,8 +104,26 @@ class EvidenceCollection extends RenJS.Plugin {
 
         if (params.fn == 'start' && room.clues){
 			room.clues.group.ignoreChildInput = false;
-			this.game.resolveAction();
             this.state.searching = room;
+			this.game.resolveAction();
+        } else if (params.fn == 'add' && !(room.clues.map[params.obj])){
+            console.log('Add', params.obj);
+            const roomState = this.state.clueRooms[room.name];
+            const newObj = {
+                key: params.obj,
+                text: params.objAttr.text,
+                icon: params.objAttr.icon,
+                x: params.objAttr.x - room.width / 2,
+                y: params.objAttr.y - room.height / 2,
+                scene: params.objAttr.scene
+            }
+            roomState.added[params.obj] = newObj;
+            // if it was previously removed, reverse that operation
+            if (roomState.removed[params.obj]){
+                delete roomState.removed[params.obj];
+            }
+            this.createObject(room, newObj, true);
+            this.game.resolveAction();
 		} else if (params.fn == 'remove' && room.clues.map[params.obj]) {
             console.log('Remove', params.obj);
             this.game.screenEffects.transition.FADEOUT(room.clues.map[params.obj]).then(()=>{

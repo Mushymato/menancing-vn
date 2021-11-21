@@ -16,7 +16,19 @@ start:
     fn: start
 
 pinkPhoneScene:
-  - text: A pink phone.
+  - text: A pink phone. It's ringing and you answer the call.
+  - text: (italic)Hello, your shipment of 1 Hatsume Miku has arrived.(end)
+  - call EvidenceCollection:
+    fn: add
+    obj: Ukimasu
+    objAttr:
+      key: Ukimasu
+      text: 今から…浮きます
+      icon: ukimasu
+      x: 300
+      y: 100
+      scene: ukimasuScene
+
   - call EvidenceCollection:
     fn: start
 
@@ -25,7 +37,13 @@ bluePhoneScene:
   - call EvidenceCollection:
     fn: remove
     obj: BluePhone
-  - scene: endGame
+  - call EvidenceCollection:
+    fn: start
+
+ukimasuScene:
+  - text: 今から…浮きます
+  - call EvidenceCollection:
+    fn: start
 
 endGame:
   - show deuzi: happy AT CENTER WITH FADE
